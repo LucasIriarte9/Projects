@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
-import CarouselBanner from "./components/carousel";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-export default function Home() {
+const Productos = () => {
   const [productos, setProductos] = useState([]);
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
+    fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((err) => {
@@ -16,28 +15,28 @@ export default function Home() {
   console.log(productos);
   return (
     <>
-      <h1 className="text-center text-3xl my-4 font-bold">Platzi Tienda</h1>
+      <h1 className="text-center text-3xl my-4 font-bold">Fake Store</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 p-4 mx-auto gap-10">
-        {productos.map((producto) => (
+        {productos.map((product) => (
           <>
             <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-auto content-center p-3">
-              <Link href={`/${producto.id}`}>
+              <Link href={`/productos/${product.id}`}>
                 <img
-                  src={producto.images}
-                  alt={producto.title}
+                  src={product.image}
+                  alt={product.title}
                   className="w-96 h-96"
                 />
               </Link>
               <div class="p-5 flex justify-center">
-                <Link href={`/${producto.id}`}>
+                <Link href={`/productos/${product.id}`}>
                   <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {producto.title}
+                    {product.title}
                   </h5>
                 </Link>
               </div>
               <div>
                 <p class="font-bold text-3xl flex justify-center">
-                  {producto.price}$
+                  {product.price}$
                 </p>
               </div>
             </div>
@@ -46,4 +45,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Productos;
