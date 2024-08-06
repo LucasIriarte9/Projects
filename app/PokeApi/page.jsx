@@ -38,7 +38,7 @@ const Login = () => {
         {pokemones.map((pokemon) => {
           return (
             <div className="mx-auto" key={pokemon.id}>
-              <Link href={`/PokeApi/${pokemon.name}`}>
+              <Link href={`/PokeApi/${pokemon.id}`}>
                 <img
                   src={pokemon.img}
                   alt={pokemon.name}
