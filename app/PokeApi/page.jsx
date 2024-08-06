@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 const Login = () => {
   const [pokemones, setPokemones] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getPokemones = async () => {
@@ -24,9 +25,12 @@ const Login = () => {
         };
       });
       setPokemones(await Promise.all(newPokemones));
+      setLoading(false);
     };
     getPokemones();
   }, []);
+  if (loading)
+    return <h2 className="flex justify-center text-4xl mt-12">Loading....</h2>;
   return (
     <>
       <h1 className="text-center text-3xl my-4 font-bold">PokeApi</h1>

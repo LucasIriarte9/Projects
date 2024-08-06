@@ -4,20 +4,25 @@ import React, { useEffect, useState } from "react";
 
 const Product = () => {
   const params = useParams();
-  console.log(params);
   const { product } = params;
-  console.log(product);
+  const [loading, setLoading] = useState(true);
 
   const [productItem, setProductItem] = useState([]);
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${product}`)
       .then((res) => res.json())
-      .then((data) => setProductItem(data))
+      .then((data) => {
+        setProductItem(data);
+        setLoading(false);
+      })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
+
+  if (loading)
+    return <h2 className="flex justify-center text-4xl mt-12">Loading....</h2>;
   return (
     <>
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-24 mb-4">

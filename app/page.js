@@ -1,19 +1,25 @@
 "use client";
 import { useEffect, useState } from "react";
-import CarouselBanner from "./components/carousel";
 import Link from "next/link";
 
 export default function Home() {
   const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     fetch("https://api.escuelajs.co/api/v1/products")
       .then((res) => res.json())
-      .then((data) => setProductos(data))
+      .then((data) => {
+        setProductos(data);
+        setLoading(false);
+      })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
-  console.log(productos);
+
+  if (loading)
+    return <h2 className="flex justify-center text-4xl mt-12">Loading....</h2>;
+
   return (
     <>
       <h1 className="text-center text-3xl my-4 font-bold">Platzi Tienda</h1>

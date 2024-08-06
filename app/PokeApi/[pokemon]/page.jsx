@@ -6,6 +6,7 @@ const Pokemon = () => {
   const params = useParams();
   const { pokemon } = params;
   const [pokemonDetail, setPokemonDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getPoke = async () => {
@@ -14,11 +15,14 @@ const Pokemon = () => {
       );
       const listaPokemon = await response.json();
       setPokemonDetail(listaPokemon);
+      setLoading(false);
     };
     getPoke();
   }, []);
 
-  console.log(pokemonDetail);
+  if (loading)
+    return <h2 className="flex justify-center text-4xl mt-12">Loading....</h2>;
+
   return (
     <div>
       {pokemonDetail ? (

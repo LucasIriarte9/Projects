@@ -118,16 +118,16 @@ const Navbar = () => {
                 Products
               </Link>
               <Link
-                href="/contact"
+                href="/To-Do"
                 className="block hover:bg-white hover:text-black rounded-lg p-2"
               >
-                Contact
+                To-Do
               </Link>
               <Link
-                href="/login"
+                href="/PokeApi"
                 className="block hover:bg-white hover:text-black rounded-lg p-2"
               >
-                Login
+                PokeApi
               </Link>
             </div>
           </div>

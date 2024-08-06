@@ -4,15 +4,21 @@ import React, { useEffect, useState } from "react";
 
 const ProductId = () => {
   const params = useParams();
-  console.log(params);
+  const [loading, setLoading] = useState(true);
   const { productId } = params;
-  console.log(productId);
   const [product, setProduct] = useState([]);
   useEffect(() => {
     fetch(`https://api.escuelajs.co/api/v1/products/${productId}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data));
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading)
+    return <h2 className="flex justify-center text-4xl mt-12">Loading....</h2>;
+
   return (
     <>
       <div className="flex flex-col md:flex-row justify-center items-center gap-8 mt-24 mb-4">
