@@ -10,7 +10,7 @@ const Pokemon = () => {
   const [loading, setLoading] = useState(true);
 
   const handleAnterior = () => {
-    setPokeId(pokeId - 1);
+    pokeId > 1 && setPokeId(pokeId - 1);
   };
   const handleSiguiente = () => {
     setPokeId(pokeId + 1);
@@ -53,12 +53,23 @@ const Pokemon = () => {
           </div>
         </div>
         <div className="flex flex-row items-center justify-center gap-12">
-          <button
-            onClick={handleAnterior}
-            className=" flex flex-row text-3xl mt-3 hover:bg-black hover:text-white rounded p-3"
-          >
-            Anterior
-          </button>
+          {pokeId > 1 ? (
+            <button
+              onClick={handleAnterior}
+              className=" flex flex-row text-3xl mt-3 hover:bg-black hover:text-white rounded p-3"
+            >
+              Anterior
+            </button>
+          ) : (
+            <button
+              disabled
+              onClick={handleAnterior}
+              className=" flex flex-row text-3xl mt-3 hover:text-slate-600 rounded p-3"
+            >
+              Anterior
+            </button>
+          )}
+
           <button
             onClick={handleSiguiente}
             className=" flex flex-row text-3xl mt-3 hover:bg-black hover:text-white rounded p-3"
